@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  # Backend API
+  api:
+    # Thay bằng 'image' để VPS tải từ Docker Hub về
+    # (Mình lấy theo username 'sonleminh' trong log cũ của bạn, nếu sai hãy sửa lại)
+    # image: sonlele/geardn-server:latest
+    build: .
+    # -----------------------------
+
+    container_name: geardn_api
+    restart: always
+    ports:
+      - '8080:8080'
+    environment:
+      - REDIS_HOST=redis_queue
+      # Đảm bảo Redis Port khớp
+      - REDIS_PORT=6379
+    env_file:
+      - .env.production
+    depends_on:
+      - redis_queue
+    networks:
+      - backend_net
+
+  # Redis cho Queue/Outbox
+  redis_queue:
+    image: redis:alpine
+    container_name: geardn_redis
+    restart: always
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+    networks:
+      - backend_net
+
+networks:
+  backend_net:
+
+volumes:
+  redis_data:

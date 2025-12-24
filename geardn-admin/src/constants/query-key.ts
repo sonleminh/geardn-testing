@@ -1,0 +1,21 @@
+export const QueryKeys = {
+    AdjustmentLog: 'ADJUSTMENT_LOG',
+    Attribute: 'ATTRIBUTE',
+    AttributeValue: 'ATTRIBUTE_VALUE',
+    Category: 'CATEGORY',
+    Enum: 'ENUM',
+    ExportLog: 'EXPORT_LOG',
+    ImportLog: 'IMPORT_LOG',
+    Inventory: 'INVENTORY',
+    Model: 'MODEL',
+    Notification: 'NOTIFICATION',
+    Order: 'ORDER',
+    OrderReturnRequest: 'ORDER_RETURN_REQUEST',
+    Payment: 'PAYMENT',
+    Product: 'PRODUCT',
+    RevenueProfitDailyStats: 'PROFIT_REVENUE_DAILY_STATS',
+    RevenueProfitSummaryStats: 'PROFIT_REVENUE_SUMMARY_STATS',
+    Sku: 'SKU',
+    Stock: 'STOCK',
+    Warehouse: 'WAREHOUSE'
+}
