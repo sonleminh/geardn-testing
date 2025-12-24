@@ -10,6 +10,9 @@ import { LoggerModule } from './logger/logger.module';
 import { UsersModule } from './modules/users/users.module';
 import { DatabaseModule } from './modules/database/database.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { BrandsModule } from './modules/brands/brands.module';
+import { CategoriesModule } from './modules/categories/categories.module';
+import { BrandsModule } from './modules/brands/brands.module';
 
 @Module({
   imports: [
@@ -36,6 +39,8 @@ import { AuthModule } from './modules/auth/auth.module';
     UsersModule,
     DatabaseModule,
     AuthModule,
+    BrandsModule,
+    CategoriesModule,
   ],
   controllers: [AppController],
   // providers: [{ provide: APP_FILTER, useClass: AllExceptionFilter }],

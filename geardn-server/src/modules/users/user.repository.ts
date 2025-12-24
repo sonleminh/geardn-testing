@@ -21,6 +21,14 @@ export class UsersRepository {
     return rows[0];
   }
 
+  async findById(id: number) {
+    const [rows] = await this.connection.query<RowDataPacket[]>(
+      'SELECT * FROM users WHERE id = ?',
+      [id],
+    );
+    return rows[0];
+  }
+
   async create(email: string, fullName: string, passwordHash: string) {
     const [result] = await this.connection.query<ResultSetHeader>(
       'INSERT INTO users (email, full_name, password) VALUES (?, ?, ?)',

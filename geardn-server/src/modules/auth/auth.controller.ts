@@ -9,17 +9,18 @@ import {
 } from '@nestjs/common';
 import { Response } from 'express';
 import { AuthService } from './auth.service';
-import { RegisterDTO } from './dto/register.dto';
-import { JwtAuthGuard } from './guards/jwt-auth.guard';
+import { CreateUserDto } from '../users/dto/create-user.dto';
+import { UsersService } from '../users/users.service';
 import { LocalAuthGuard } from './guards/local-auth.guard';
-import { UserService } from '../user/user.service';
-import { CreateUserDto } from '../user/dto/create-user.dto';
-import { GoogleOAuthService } from './social/google.oauth.service';
+import { JwtAuthGuard } from './guards/jwt-auth.guard';
+import { CurrentUser } from 'src/common/decorators/current-user.decorator';
+import { IUser } from 'src/interfaces/IUser';
+
 @Controller('auth')
 export class AuthController {
   constructor(
     private readonly authService: AuthService,
-    private readonly userService: UserService,
+    private readonly userService: UsersService,
   ) {}
   @Post('signup')
   async signUp(@Body() dto: CreateUserDto) {
@@ -39,8 +40,8 @@ export class AuthController {
 
   @UseGuards(JwtAuthGuard)
   @Get('whoami')
-  async getProfile(@Req() req) {
-    return this.authService.getProfile(req.user);
+  async getProfile(@CurrentUser() user: IUser) {
+    return this.userService.getProfile(user);
   }
 
   @Get('refresh-token')
